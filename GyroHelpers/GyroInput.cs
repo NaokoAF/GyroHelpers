@@ -28,6 +28,11 @@ public class GyroInput
 		}
 	}
 
+	/// <summary>
+	/// Calibrated gyro bias.
+	/// </summary>
+	public Vector3 Bias => bias;
+
 	bool calibrating;
 	Vector3 gyro;
 	Vector3 accel;
