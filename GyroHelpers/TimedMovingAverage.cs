@@ -22,8 +22,8 @@ public class TimedMovingAverage
 	/// <param name="inputsPerSecond">Estimated amount of inputs per second. If inputs exceed this value, the internal buffer grows accordingly.</param>
 	public TimedMovingAverage(float timeWindow, int inputsPerSecond)
 	{
-		ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(timeWindow, 0);
-		ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(inputsPerSecond, 0);
+		if (timeWindow < 0) throw new ArgumentOutOfRangeException(nameof(timeWindow));
+		if (inputsPerSecond < 0) throw new ArgumentOutOfRangeException(nameof(inputsPerSecond));
 
 		TimeWindow = timeWindow;
 		buffer = new Entry[(int)(inputsPerSecond * timeWindow)];
@@ -87,8 +87,8 @@ public class TimedMovingAverage
 	void Grow()
 	{
 		int capacity = buffer.Length * 2;
-		if ((uint)capacity > Array.MaxLength)
-			capacity = Array.MaxLength;
+		if ((uint)capacity > 0x7FFFFFC7)
+			capacity = 0x7FFFFFC7;
 
 		// cant grow any further
 		if (capacity < buffer.Length)
