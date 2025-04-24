@@ -36,7 +36,7 @@ public class TieredSmoothing2D
 		// we then interpolate between direct and smoothed inputs based on this value
 		// this means inputs below thresholdSmooth get smoothed, inputs above thresholdDirect dont, and everything in between gets a mix of both
 		float inputMagnitude = input.Length();
-		float weight = MathHelper.InverseLerp(ThresholdSmooth, ThresholdDirect, inputMagnitude);
+		float weight = MathHelper.Clamp(MathHelper.InverseLerp(ThresholdSmooth, ThresholdDirect, inputMagnitude), 0f, 1f);
 		Vector2 directInput = input * weight;
 		Vector2 smootherInput = new Vector2(
 			movingAverageX.Add(deltaTime, input.X * (1f - weight)),
