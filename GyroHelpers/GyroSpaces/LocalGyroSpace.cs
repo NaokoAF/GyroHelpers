@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace GyroHelpers.GyroSpaces;
 
@@ -14,8 +15,34 @@ public class LocalGyroSpace : IGyroSpace
 	/// </summary>
 	public GyroAxis AxisY { get; set; } = GyroAxis.Yaw;
 
+	public LocalGyroSpace(GyroAxis axisX, GyroAxis axisY)
+	{
+		AxisX = axisX;
+		AxisY = axisY;
+	}
+
+	public LocalGyroSpace()
+	{
+	}
+
 	public Vector2 Transform(Gyroscope gyro)
 	{
-		return new Vector2(gyro.Gyro[(int)AxisX], gyro.Gyro[(int)AxisY]);
+		return new Vector2(GetAxis(gyro.Gyro, AxisX), GetAxis(gyro.Gyro, AxisY));
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	static float GetAxis(Vector3 vector, GyroAxis axis)
+	{
+#if NET7_0_OR_GREATER
+		return vector[(int)axis];
+#else
+		switch (axis)
+		{
+			case GyroAxis.Pitch: return vector.X;
+			case GyroAxis.Yaw: return vector.Y;
+			case GyroAxis.Roll: return vector.Z;
+			default: throw new ArgumentOutOfRangeException(nameof(axis));
+		}
+#endif
 	}
 }
