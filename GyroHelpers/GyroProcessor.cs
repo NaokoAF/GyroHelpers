@@ -40,7 +40,18 @@ public class GyroProcessor
 	/// </summary>
 	public float SmoothingTime { get => smoothing.SmoothTime; set => smoothing.SmoothTime = value; }
 
+	/// <summary>
+	/// When <see cref="MomentumActive"/> is true, reduces gyro input until it stops. Radians per second.
+	/// </summary>
+	public Vector2 MomentumFriction { get => momentum.Friction; set => momentum.Friction = value; }
+
+	/// <summary>
+	/// Pauses gyro input and keeps momentum. See <see cref="MomentumFriction"/>
+	/// </summary>
+	public bool MomentumActive { get => momentum.Active; set => momentum.Active = value; }
+
 	TieredSmoothing2D smoothing = new(0.1f, 0f, 0f, 256);
+	GyroMomentum momentum = new();
 
 	public GyroProcessor(IGyroSpace gyroSpace)
 	{
@@ -63,6 +74,7 @@ public class GyroProcessor
 		result = smoothing.Apply(result, deltaTime);
 		result = ApplyTightening(result, TighteningThreshold);
 		result = Acceleration.Transform(result);
+		result = momentum.Update(result, deltaTime);
 		return result * deltaTime;
 	}
 
@@ -72,6 +84,7 @@ public class GyroProcessor
 	public void Reset()
 	{
 		smoothing.Reset();
+		momentum.Reset();
 	}
 
 	// squeezes everything below threshold down to 0
