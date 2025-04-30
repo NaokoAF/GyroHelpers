@@ -3,6 +3,10 @@ using System.Runtime.CompilerServices;
 
 namespace GyroHelpers.GyroSpaces;
 
+/// <summary>
+/// Local Space implementation. Maps 2 of the 3 gyro axes to the output.
+/// <para>Simplest implementation. Mainly useful for handheld consoles and phones.</para>
+/// </summary>
 public class LocalGyroSpace : IGyroSpace
 {
 	/// <summary>

@@ -2,6 +2,9 @@ using System.Runtime.CompilerServices;
 
 namespace GyroHelpers;
 
+/// <summary>
+/// Calculates a moving average while taking time into account.
+/// </summary>
 public class TimedMovingAverage
 {
 	public float TimeWindow { get; set; }

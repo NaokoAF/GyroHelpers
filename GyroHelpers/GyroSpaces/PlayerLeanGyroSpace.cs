@@ -2,6 +2,11 @@ using System.Numerics;
 
 namespace GyroHelpers.GyroSpaces;
 
+/// <summary>
+/// Player Space (Lean) implementation from <see href="http://gyrowiki.jibbsmart.com/blog:player-space-gyro-and-alternatives-explained">GyroWiki</see>.
+/// Takes gravity into account for a more natural translation of movements.
+/// <para>Tilting the controller like a wheel, relative to the player, counts as horizontal movement.</para>
+/// </summary>
 public class PlayerLeanGyroSpace : IGyroSpace
 {
 	public float RollRelaxFactor { get; set; } = 1.15f;

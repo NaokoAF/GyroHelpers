@@ -4,8 +4,22 @@ namespace GyroHelpers;
 
 public class TieredSmoothing2D
 {
+	/// <summary>
+	/// Inputs below this threshold will be smoothed.
+	/// <para>If changing this value, also change <see cref="ThresholdDirect"/>.</para>
+	/// </summary>
 	public float ThresholdSmooth { get; set; }
+
+	/// <summary>
+	/// Values above this threshold won't be smoothed.
+	/// <para>If changing this value, also change <see cref="ThresholdSmooth"/>.</para>
+	/// </summary>
 	public float ThresholdDirect { get; set; }
+
+	/// <summary>
+	/// Amount of time to smooth for.
+	/// <para>See <see cref="ThresholdSmooth"/> and <see cref="ThresholdDirect"/>.</para>
+	/// </summary>
 	public float SmoothTime
 	{
 		get => movingAverageX.TimeWindow;

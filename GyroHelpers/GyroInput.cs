@@ -43,6 +43,10 @@ public class GyroInput
 	GyroMovingAverage biasCalculator = new();
 	GyroMovingAverage averageCalculator = new();
 
+	/// <summary>
+	/// Creates a GyroInput.
+	/// </summary>
+	/// <param name="gravityCalculator">Algorithm for calculating gravity.</param>
 	public GyroInput(IGravityCalculator gravityCalculator)
 	{
 		this.gravityCalculator = gravityCalculator;

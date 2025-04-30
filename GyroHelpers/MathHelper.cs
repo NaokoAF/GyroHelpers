@@ -4,6 +4,7 @@ namespace GyroHelpers;
 
 /// <summary>
 /// Useful math functions used all around GyroHelpers.
+/// Includes wrappers for functions only available on newer .NET versions.
 /// </summary>
 public static class MathHelper
 {

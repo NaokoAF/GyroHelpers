@@ -2,6 +2,9 @@
 
 namespace GyroHelpers;
 
+/// <summary>
+/// Allows gyro input to be paused, while keeping it's momentum.
+/// </summary>
 public class GyroMomentum
 {
 	/// <summary>

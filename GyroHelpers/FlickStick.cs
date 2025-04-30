@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GyroHelpers;
 
+/// <summary>
+/// Flick Stick implementation. Based on <see href="http://gyrowiki.wikidot.com/blog:good-gyro-controls-part-2:the-flick-stick">Jibb Smart's implementation.</see>
+/// </summary>
 public class FlickStick
 {
 	/// <summary>
@@ -43,13 +46,13 @@ public class FlickStick
 	public float SmoothingThresholdDirect { get => smoothing.ThresholdDirect; set => smoothing.ThresholdDirect = value; }
 
 	/// <summary>
-	/// Amount of time to smooth rotations by.
+	/// Amount of time to smooth rotations for.
 	/// <para>See <see cref="SmoothingThresholdSmooth"/> and <see cref="SmoothingThresholdDirect"/>.</para>
 	/// </summary>
 	public float SmoothingTime { get => smoothing.SmoothTime; set => smoothing.SmoothTime = value; }
 
 	/// <summary>
-	/// Wether a flick is currently active.
+	/// Whether a flick is currently active.
 	/// </summary>
 	public bool IsFlicking => flicking;
 
@@ -57,7 +60,7 @@ public class FlickStick
 	float flickProgress = 1f;
 	float flickAngle;
 	float? lastStickAngle;
-	TieredSmoothing1D smoothing = new(0.064f, 1.15f * MathHelper.DegreesToRadians, 2.3f * MathHelper.DegreesToRadians, 256);
+	TieredSmoothing1D smoothing = new(0.064f, 0.02f, 0.04f, 256); // JSM default settings
 
 	/// <summary>
 	/// Process stick input and convert it into an angle change.
@@ -78,13 +81,13 @@ public class FlickStick
 				flickAngle = ApplySnapping(stickAngle, Snapping, SnappingStrength, SnappingForwardDeadzone);
 				flickProgress = 0;
 
-				// no flick animation. simply increment
+				// no flick animation. increment instantly
 				if (FlickTime <= 0)
 					result += flickAngle;
 			}
 			else
 			{
-				// after the initial flick, add any angle changes
+				// add any angle changes after the initial flick
 				float deltaAngle = WrapDeltaAngle(stickAngle - (lastStickAngle ?? stickAngle));
 				result += smoothing.Apply(deltaAngle, deltaTime);
 			}

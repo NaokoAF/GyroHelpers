@@ -4,10 +4,17 @@ using System.Runtime.CompilerServices;
 
 namespace GyroHelpers;
 
+/// <summary>
+/// Applies a pre-defined processing chain to gyro inputs. Provided for convenience.
+/// <para>
+/// If you need more control over the processing, manually implement a similar class.
+/// A <see cref="IGyroSpace"/> and <see cref="ApplyTightening"/> is enough for most cases.
+/// </para>
+/// </summary>
 public class GyroProcessor
 {
 	/// <summary>
-	/// Algorithm used for converting 3-axis gyro into a 2-axis output.
+	/// Algorithm used for converting gyro inputs into a 2-axis output.
 	/// </summary>
 	public IGyroSpace GyroSpace { get; set; }
 
@@ -35,7 +42,7 @@ public class GyroProcessor
 	public float SmoothingThresholdDirect { get => smoothing.ThresholdDirect; set => smoothing.ThresholdDirect = value; }
 
 	/// <summary>
-	/// Amount of time to smooth rotations by.
+	/// Amount of time to smooth rotations for.
 	/// <para>See <see cref="SmoothingThresholdSmooth"/> and <see cref="SmoothingThresholdDirect"/>.</para>
 	/// </summary>
 	public float SmoothingTime { get => smoothing.SmoothTime; set => smoothing.SmoothTime = value; }
@@ -53,6 +60,10 @@ public class GyroProcessor
 	TieredSmoothing2D smoothing = new(0.1f, 0f, 0f, 256);
 	GyroMomentum momentum = new();
 
+	/// <summary>
+	/// Creates a GyroProcessor.
+	/// </summary>
+	/// <param name="gyroSpace">Algorithm used for converting gyro inputs into a 2-axis output.</param>
 	public GyroProcessor(IGyroSpace gyroSpace)
 	{
 		GyroSpace = gyroSpace;
@@ -87,7 +98,10 @@ public class GyroProcessor
 		momentum.Reset();
 	}
 
-	// squeezes everything below threshold down to 0
+	/// <summary>
+	/// Squeezes values below threshold down to 0.
+	/// </summary>
+	/// <returns>Tightened input.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static Vector2 ApplyTightening(Vector2 input, float threshold)
 	{

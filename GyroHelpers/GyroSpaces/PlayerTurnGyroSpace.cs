@@ -2,6 +2,11 @@ using System.Numerics;
 
 namespace GyroHelpers.GyroSpaces;
 
+/// <summary>
+/// Player Space (Turn) implementation from <see href="http://gyrowiki.jibbsmart.com/blog:player-space-gyro-and-alternatives-explained">GyroWiki</see>.
+/// Takes gravity into account for a more natural translation of movements.
+/// <para>Turning the controller side to side, relative to the player, counts as horizontal movement.</para>
+/// </summary>
 public class PlayerTurnGyroSpace : IGyroSpace
 {
 	public float YawRelaxFactor { get; set; } = 2f;

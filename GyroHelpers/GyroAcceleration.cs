@@ -2,6 +2,9 @@ using System.Numerics;
 
 namespace GyroHelpers;
 
+/// <summary>
+/// Applies linear acceleration to gyro inputs. Slow movements use a lower sensitivity than faster movements.
+/// </summary>
 public class GyroAcceleration
 {
 	/// <summary>

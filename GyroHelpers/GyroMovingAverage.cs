@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GyroHelpers;
 
+/// <summary>
+/// Averages multiple gyro samples together.
+/// </summary>
 public class GyroMovingAverage
 {
 	Vector3 value;
