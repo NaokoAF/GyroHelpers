@@ -14,8 +14,8 @@ GyroHelpers is designed with SDL3 in mind. If using a different library, inputs 
 The first step is to calibrate gyro and calculate gravity, which is done with the `GyroInput` class.  
 
 At the start of the frame, before polling input, call `GyroInput.Begin()`.  
-For every received gyro sample, call `GyroInput.InputGyro(Vector3 gyro, ulong timestamp)`.  
-For every received accelerometer sample, call `GyroInput.InputAccelerometer(Vector3 accel, ulong timestamp)`.  
+For every received gyro sample, call `GyroInput.AddGyroSample(Vector3 gyro, ulong timestamp)`.  
+For every received accelerometer sample, call `GyroInput.AddAccelerometerSample(Vector3 accelerometer, ulong timestamp)`.  
 After all samples are received, you can query the result with `GyroInput.Gyro`.  
 
 To calibrate the gyro and correct for drift, set `GyroInput.Calibrating`.  
@@ -73,10 +73,10 @@ public unsafe void Update(float deltaTime)
                 switch ((SDL_SensorType)evnt.gsensor.sensor)
                 {
                     case SDL_SensorType.SDL_SENSOR_GYRO:
-                        gyroInput.InputGyro(data, timestamp);
+                        gyroInput.AddGyroSample(data, timestamp);
                         break;
                     case SDL_SensorType.SDL_SENSOR_ACCEL:
-                        gyroInput.InputAccelerometer(data, timestamp);
+                        gyroInput.AddAccelerometerSample(data, timestamp);
                         break;
                 }
                 break;

@@ -69,7 +69,7 @@ public class GyroInput
 	/// </summary>
 	/// <param name="gyro">Gyroscope in radians per second</param>
 	/// <param name="timestamp">Timestamp in nanoseconds</param>
-	public void InputGyro(Vector3 gyro, ulong timestamp)
+	public void AddGyroSample(Vector3 gyro, ulong timestamp)
 	{
 		if (Calibrating)
 		{
@@ -94,11 +94,11 @@ public class GyroInput
 	/// <summary>
 	/// Feed accelerometer into gravity calculator. Call this for every received accelerometer sample.
 	/// </summary>
-	/// <param name="accel">Accelerometer in meters per second squared</param>
+	/// <param name="accelerometer">Accelerometer in meters per second squared</param>
 	/// <param name="timestamp">Timestamp in nanoseconds</param>
-	public void InputAccelerometer(Vector3 accel, ulong timestamp)
+	public void AddAccelerometerSample(Vector3 accelerometer, ulong timestamp)
 	{
-		this.accel = accel;
+		accel = accelerometer;
 	}
 
 	/// <summary>
