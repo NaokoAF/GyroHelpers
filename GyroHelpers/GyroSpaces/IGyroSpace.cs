@@ -7,5 +7,5 @@ namespace GyroHelpers.GyroSpaces;
 /// </summary>
 public interface IGyroSpace
 {
-	Vector2 Transform(Gyroscope gyro);
+	Vector2 Transform(GyroState gyro);
 }

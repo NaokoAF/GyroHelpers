@@ -11,7 +11,7 @@ public class GyroInput
 	/// <summary>
 	/// Current gyro state.
 	/// </summary>
-	public Gyroscope Gyro => new(gyro, accel, gravity);
+	public GyroState Gyro => new(gyro, accel, gravity);
 
 	/// <summary>
 	/// Calibrate gyro bias to correct drift.

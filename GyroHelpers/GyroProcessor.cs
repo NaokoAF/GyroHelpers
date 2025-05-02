@@ -79,7 +79,7 @@ public class GyroProcessor
 	/// <param name="gyro">Gyro data, usually coming from <see cref="GyroInput"/>.</param>
 	/// <param name="deltaTime">Time since last call in seconds.</param>
 	/// <returns>Processed gyro delta in radians.</returns>
-	public Vector2 Update(Gyroscope gyro, float deltaTime)
+	public Vector2 Update(GyroState gyro, float deltaTime)
 	{
 		Vector2 result = GyroSpace.Transform(gyro);
 		result = smoothing.Apply(result, deltaTime);

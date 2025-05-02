@@ -11,7 +11,7 @@ public class PlayerTurnGyroSpace : IGyroSpace
 {
 	public float YawRelaxFactor { get; set; } = 2f;
 
-	public Vector2 Transform(Gyroscope gyro)
+	public Vector2 Transform(GyroState gyro)
 	{
 		// use world yaw for yaw direction, local combined yaw for magnitude
 		float worldYaw = gyro.Gyro.Y * gyro.Gravity.Y + gyro.Gyro.Z * gyro.Gravity.Z; // dot product but just yaw and roll

@@ -11,7 +11,7 @@ public class PlayerLeanGyroSpace : IGyroSpace
 {
 	public float RollRelaxFactor { get; set; } = 1.15f;
 
-	public Vector2 Transform(Gyroscope gyro)
+	public Vector2 Transform(GyroState gyro)
 	{
 		// project pitch axis onto gravity plane
 		Vector3 pitchVector = Vector3.UnitX - gyro.Gravity * gyro.Gravity.X;

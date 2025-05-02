@@ -2,7 +2,7 @@
 
 namespace GyroHelpers;
 
-public record struct Gyroscope
+public record struct GyroState
 {
 	/// <summary>
 	/// Calibrated gyroscope value in radians per second.
@@ -19,7 +19,7 @@ public record struct Gyroscope
 	/// </summary>
 	public Vector3 Gravity;
 
-	public Gyroscope(Vector3 gyro, Vector3 accelerometer, Vector3 gravity)
+	public GyroState(Vector3 gyro, Vector3 accelerometer, Vector3 gravity)
 	{
 		Gyro = gyro;
 		Accelerometer = accelerometer;

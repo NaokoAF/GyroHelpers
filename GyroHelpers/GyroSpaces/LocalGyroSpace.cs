@@ -29,7 +29,7 @@ public class LocalGyroSpace : IGyroSpace
 	{
 	}
 
-	public Vector2 Transform(Gyroscope gyro)
+	public Vector2 Transform(GyroState gyro)
 	{
 		return new Vector2(GetAxis(gyro.Gyro, AxisX), GetAxis(gyro.Gyro, AxisY));
 	}

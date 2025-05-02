@@ -22,7 +22,7 @@ To calibrate the gyro and correct for drift, set `GyroInput.Calibrating`.
 
 ## Gyro Processing
 For most cases, you can process the gyro data with `GyroProcessor`.  
-Feed `GyroInput.Gyro` into `GyroProcessor.Update(Gyroscope gyro, float deltaTime)`.  
+Feed `GyroInput.Gyro` into `GyroProcessor.Update(GyroState gyro, float deltaTime)`.  
 The result can added to the camera's pitch and yaw. Multiply this by a sensitivity slider.  
 If you need the result in degrees, multiply by `MathHelper.RadiansToDegrees`.  
 
