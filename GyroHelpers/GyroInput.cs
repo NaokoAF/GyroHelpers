@@ -21,8 +21,9 @@ public class GyroInput
 		get => calibrating;
 		set
 		{
-			if (calibrating != value)
-				biasCalculator.Reset();
+			// reset state when starting calibration
+			if (calibrating != value && value)
+				Reset();
 
 			calibrating = value;
 		}
@@ -74,7 +75,6 @@ public class GyroInput
 		if (Calibrating)
 		{
 			bias = biasCalculator.Add(gyro);
-			ClearState();
 			return;
 		}
 
@@ -106,18 +106,13 @@ public class GyroInput
 	/// </summary>
 	public void Reset()
 	{
-		ClearState();
-		bias = Vector3.Zero;
-		biasCalculator.Reset();
-	}
-
-	void ClearState()
-	{
 		gyro = Vector3.Zero;
 		accel = Vector3.Zero;
 		gravity = Vector3.Zero;
+		bias = Vector3.Zero;
 		prevTimestamp = null;
-		averageCalculator.Reset();
 		gravityCalculator.Reset();
+		biasCalculator.Reset();
+		averageCalculator.Reset();
 	}
 }
