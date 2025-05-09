@@ -34,7 +34,14 @@ public class GyroMomentum
 		{
 			Vector2 newMomentum = Vector2.Abs(momentum) - Friction * deltaTime;
 			newMomentum = Vector2.Max(newMomentum, Vector2.Zero);
+
+#if NET9_0_OR_GREATER
 			momentum = Vector2.CopySign(newMomentum, momentum);
+#else
+			momentum.X = newMomentum.X * Math.Sign(momentum.X);
+			momentum.Y = newMomentum.Y * Math.Sign(momentum.Y);
+#endif
+
 			return momentum;
 		}
 		else
