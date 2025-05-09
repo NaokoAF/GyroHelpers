@@ -34,9 +34,7 @@ public static class MathHelper
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static float Exp2(float x)
 	{
-#if NET7_0_OR_GREATER
-		return float.Exp2(x);
-#elif NETCOREAPP2_0_OR_GREATER
+#if NETCOREAPP2_0_OR_GREATER
 		return MathF.Pow(2, x);
 #else
 		return (float)Math.Pow(2, x);
