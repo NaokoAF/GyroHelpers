@@ -34,11 +34,12 @@ public static class MathHelper
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static float Exp2(float x)
 	{
-#if NETCOREAPP2_0_OR_GREATER
+#if NET7_0_OR_GREATER
 		return float.Exp2(x);
+#elif NETCOREAPP2_0_OR_GREATER
+		return MathF.Pow(2, x);
 #else
-		// https://stackoverflow.com/a/10552567
-		return (24 + x * (24 + x * (12 + x * (4 + x)))) * 0.041666666f;
+		return (float)Math.Pow(2, x);
 #endif
 	}
 
