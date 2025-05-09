@@ -46,7 +46,7 @@ public static class MathHelper
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static float Round(float value)
 	{
-#if NET6_0_OR_GREATER
+#if NETCOREAPP2_0_OR_GREATER
 		return MathF.Round(value);
 #else
 		return (float)Math.Round(value);
@@ -56,7 +56,7 @@ public static class MathHelper
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static float Clamp(float value, float min, float max)
 	{
-#if NET6_0_OR_GREATER
+#if NETCOREAPP2_0_OR_GREATER
 		return Math.Clamp(value, min, max);
 #else
 		if (value < min) return min;
