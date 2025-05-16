@@ -10,19 +10,13 @@ namespace GyroHelpers.GyroSpaces;
 public class LocalGyroSpace : IGyroSpace
 {
 	/// <summary>
-	/// Gyro axis used for output's X axis. This is equivalent to vertical movement.
+	/// Gyro axis used for output's yaw axis (Y).
 	/// </summary>
-	public GyroAxis AxisX { get; set; } = GyroAxis.Pitch;
+	public GyroAxis YawAxis { get; set; } = GyroAxis.Yaw;
 
-	/// <summary>
-	/// Gyro axis used for output's Y axis. This is equivalent to horizontal movement.
-	/// </summary>
-	public GyroAxis AxisY { get; set; } = GyroAxis.Yaw;
-
-	public LocalGyroSpace(GyroAxis axisX, GyroAxis axisY)
+	public LocalGyroSpace(GyroAxis yawAxis)
 	{
-		AxisX = axisX;
-		AxisY = axisY;
+		YawAxis = yawAxis;
 	}
 
 	public LocalGyroSpace()
@@ -34,7 +28,7 @@ public class LocalGyroSpace : IGyroSpace
 		// invert roll axis
 		gyro.Gyro.Z = -gyro.Gyro.Z;
 
-		return new Vector2(GetAxis(gyro.Gyro, AxisX), GetAxis(gyro.Gyro, AxisY));
+		return new Vector2(gyro.Gyro.X, GetAxis(gyro.Gyro, YawAxis));
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
