@@ -29,7 +29,7 @@ public class PlayerLeanGyroSpace : IGyroSpace
 
 			float worldRoll = gyro.Gyro.Y * rollVector.Y + gyro.Gyro.Z * rollVector.Z; // dot product but just yaw and roll
 			float gyroMagnitude = MathHelper.Sqrt(gyro.Gyro.Y * gyro.Gyro.Y + gyro.Gyro.Z * gyro.Gyro.Z); // magnitude but just yaw and roll
-			float yaw = -Math.Sign(worldRoll) * sideReduction * Math.Min(Math.Abs(worldRoll) * RollRelaxFactor, gyroMagnitude);
+			float yaw = Math.Sign(worldRoll) * sideReduction * Math.Min(Math.Abs(worldRoll) * RollRelaxFactor, gyroMagnitude);
 			return new Vector2(gyro.Gyro.X, yaw);
 		}
 
