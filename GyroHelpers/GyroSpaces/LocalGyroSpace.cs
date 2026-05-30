@@ -25,9 +25,6 @@ public class LocalGyroSpace : IGyroSpace
 
 	public Vector2 Transform(GyroState gyro)
 	{
-		// invert roll axis
-		gyro.Gyro.Z = -gyro.Gyro.Z;
-
 		return new Vector2(gyro.Gyro.X, GetAxis(gyro.Gyro, YawAxis));
 	}
 
